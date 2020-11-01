@@ -27,7 +27,7 @@ import java.util.Arrays;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean isAnagram(String s, String t) {
-        // 方法1： 数组标记的方式
+        // 方法1： 数组标记的方式（其实也可以用hashmap，不过这个题目的场景我们用数组即可）
         if (s.length() != t.length()) {
             return false;
         }
