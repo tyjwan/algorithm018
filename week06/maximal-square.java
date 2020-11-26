@@ -23,7 +23,63 @@ class Solution {
     public int maximalSquare(char[][] matrix) {
         // 时间复杂度：O(N^2),两层for循环
         // 空间复杂度，O(N^2),开了二维数组进行dp
-        return func1(matrix);
+//        return func1(matrix);
+
+        // 时间复杂度：O(N^2),两层for循环
+        // 空间复杂度，O(N)
+        return func2(matrix);
+
+    }
+
+    /**
+     * 思路二：对思路一进行空间优化以及代码优化
+     *
+     * @param matrix 原始数组
+     * @return 最大正方形面积
+     */
+    private int func2(char[][] matrix) {
+        // 1. 找重复性。可以发现，矩阵中每一个元素的最大正方形都和他的长宽有关，而长宽直接和他左边的元素，上面的元素，斜对角上的元素相关
+        // 2. 定义状态数组dp[i][j],代表以第i行第j列元素为右下角的能够形成的最大正方形的边的长度。
+        // 3. DP方程：dp[i][j] = Min{dp[i-1][j], dp[i][j-1], dp[i-1][j-1]} + 1，这里的dp可以不用申请，直接用原始的matrix进行模拟
+
+        // 边界条件判断
+        if (matrix.length == 0) {
+            return 0;
+        }
+
+        // 获取二维矩阵的长宽。
+        int row = matrix.length;
+        int col = matrix[0].length;
+
+        // 记录最大值
+        int max = 0;
+        // 根据第一行第一列初始化max的值
+        for (int i = 0; i < row; i++) {
+            if (matrix[i][0] == '1') {
+                max = 1;
+                break;
+            }
+        }
+        for (int i = 0; i < col; i++) {
+            if (matrix[0][i] == '1') {
+                max = 1;
+                break;
+            }
+        }
+
+        // 循环dp
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                // 如果当前这个元素不为0
+                if (matrix[i][j] == '1') {
+                    int minValue = Math.min(matrix[i - 1][j] - '0', Math.min(matrix[i][j - 1] - '0', matrix[i - 1][j - 1] - '0')) + 1;
+                    matrix[i][j] = (char) (minValue + '0');
+                    max = Math.max(minValue, max);
+                }
+            }
+        }
+
+        return max * max;
     }
 
     /**

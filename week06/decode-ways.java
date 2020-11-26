@@ -67,6 +67,18 @@ package Algorithm.leetcode.leetcode.editor.cn;
 class Solution {
     // 题目链接：https://leetcode-cn.com/problems/decode-ways/
     public int numDecodings(String s) {
+        // 时间复杂度：O(N),一层遍历
+        // 空间复杂度：O(N),额外开了一个一维数组
+        return func1(s);
+    }
+
+    /**
+     * 思路一：一维DP
+     *
+     * @param s 原始字符串
+     * @return 最多编码数
+     */
+    private int func1(String s) {
         // 1. 找重复性。当前字符串的解码方式分为几种情况。第一种当前s[i]为0， 如果s[i - 1]为1，或者2，证明最后两位可以拼成一个字母。那么以当前字符结尾的字符串的编码方式就
         // 是dp[i - 2].否则就是0。第二种如果当前s[i]不为0，那么至少dp[i] = dp[i - 1]，也就是最后一位自己单独组。然后如果倒数第二位和倒数第一位组合的数字在[11, 26]之间，
         // 证明最后两位也可以组成一组成为一个字母，这种情况下dp[i]要再加一个dp[i - 2]
