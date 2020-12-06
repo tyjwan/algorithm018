@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class 括号生成 {
+class generate-parentheses {
     // 题目链接：https://leetcode-cn.com/problems/generate-parentheses/
 
     public List<String> result = new ArrayList<>();
