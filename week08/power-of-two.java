@@ -27,22 +27,21 @@ class power-of-two {
     public boolean isPowerOfTwo(int n) {
         // 暴力法
         // 如果一个数要是2的幂，那注定他的二进制1的个数注定只能是一个
-
-//        while ((n & 1) == 0) {
-//            n >>= 1;
-//        }
-//        return n == 1;
+        while ((n & 1) == 0) {
+            n >>= 1;
+        }
+        return n == 1;
 
         // 更好的思路，既然有且仅有一个1，那我们就把他唯一的那个1干掉
-//        if (n == 0) {
-//            return false;
-//        }
-//
-//        long x = n;
-//
-//        x &= (x - 1);
-//
-//        return x == 0;
+        if (n == 0) {
+            return false;
+        }
+
+        long x = n;
+
+        x &= (x - 1);
+
+        return x == 0;
 
         // 得到最低位的1即可
         if (n == 0) {
